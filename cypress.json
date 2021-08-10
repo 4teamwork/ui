@@ -1,0 +1,9 @@
+
+{
+    "numTestsKeptInMemory": 1,
+    "video": false,
+    "fixturesFolder": "test/e2e/files",
+    "integrationFolder": "test/e2e/specs",
+    "pluginsFile": "test/e2e/plugins",
+    "supportFile": "test/e2e/support/index.js"
+  }
