@@ -18,7 +18,10 @@ module.exports = {
       {
         title: 'Components',
         sidebarDepth: 1,
-        children: [{ title: 'AppLayout', path: '/components/app-layout/' }],
+        children: [
+          { title: 'AppLayout', path: '/components/app-layout/' },
+          { title: 'AppSwitcher', path: '/components/app-switcher/' },
+        ],
       },
     ],
   },

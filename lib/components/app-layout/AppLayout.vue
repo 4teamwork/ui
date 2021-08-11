@@ -3,20 +3,19 @@
     <slot name="navigation-root">
       <Navigation
         v-bind="$attrs"
-        :apps="apps"
-        :current-app="currentApp"
         :customer="customer"
         :version="version"
         :show-help="showHelp"
         :show-feedback="showFeedback"
         :mini-variant="miniVariant"
+        :app-name="appName"
         v-on="$listeners"
       >
         <template v-slot:navigation-main>
           <slot name="navigation-main" />
         </template>
-        <template v-slot:fallback-app>
-          <slot name="fallback-app" />
+        <template v-slot:app-icon>
+          <slot name="app-icon" />
         </template>
       </Navigation>
     </slot>
@@ -51,13 +50,9 @@ export default {
   name: 'AppLayout',
   components: { Toolbar, Navigation },
   props: {
-    apps: {
-      type: Array,
-      default: () => [],
-    },
-    currentApp: {
-      type: Object,
-      default: () => null,
+    appName: {
+      type: String,
+      default: () => '',
     },
     customer: {
       type: String,

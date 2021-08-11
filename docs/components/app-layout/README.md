@@ -2,10 +2,10 @@
 
 The `ftw-app-layout` component is used to provide the application layout for all 4teamwork applications.
 The design is derived from the OneGov GEVER product. Various slots provide entrypoints for customizations.
-The layout provides components such as the toolbar, usermenu, navigation, app-switcher, help- and feedback buttons.
+The layout provides components such as the toolbar, usermenu, navigation, help- and feedback buttons.
 The navigation is collapsible to safe space for moblie devices.
 
-![App Switcher](./images/app_layout_app_switcher.png)
+![App Switcher](./images/app_layout.png)
 
 ## Usage
 
@@ -17,11 +17,12 @@ The navigation is collapsible to safe space for moblie devices.
 
 ## Example
 
-The following example defines apps, navigation, toolbar and the usermenu.
+The following example defines navigation, toolbar, and the usermenu.
+Also the appname and the fallback app in the top left corner are defined.
 
 ``` vue
 <template>
-  <ftw-app-layout show-help show-feedback :mini-variant.sync="miniVariant" :apps="apps" :current-app.sync="currentApp">
+  <ftw-app-layout show-help show-feedback :mini-variant.sync="miniVariant" app-name="My App">
 
     <template #fallback-app>
       <v-icon>mdi-bird</v-icon>
@@ -109,12 +110,6 @@ export default {
   data() {
     return {
       miniVariant: false,
-      currentApp: { title: 'Birds', color: '#FF0000' },
-      apps: [
-        { title: 'Birds', color: '#FF0000' },
-        { title: 'Apes', color: '#00FF00' },
-        { title: 'Tigers', color: '#0000FF' },
-      ],
     }
   },
 }
@@ -126,7 +121,7 @@ export default {
 | Name         | Type    | Default | Description                                           |
 |--------------|---------|---------|-------------------------------------------------------|
 | apps         | Array   | []      | The apps listed in the AppSwitcher                    |
-| currentApp   | Object  | null    | The current selected app in the AppSwitcher           |
+| appName      | String  | ''      | The current apps name                                 |
 | customer     | String  | ''      | Will be listed in the toolbar next to the AppSwitcher |
 | version      | String  | ''      | Will be listed next to the company attribution        |
 | showHelp     | Boolean | false   | Enables the Help Button                               |
@@ -139,7 +134,6 @@ export default {
 |---------------------|------------------------------------------------------------------------------------|
 | help                | Emits when the help button has been clicked                                        |
 | feedback            | Emits when the feedback button has been clicked                                    |
-| update:current-app  | Emits the current app when the current app has been changed                        |
 | update:mini-variant | Emits the current state of the mini variant when the mini variant has been changed |
 
 ## Slots
@@ -151,7 +145,7 @@ export default {
 | toolbar-main    | Slot to fill in the left section of the toolbar                               |
 | toolbar-root    | Slot to replace the whole toolbar                                             |
 | toolbar-actions | Slot to fill in actions for the toolbar next to the user menu                 |
-| fallback-app    | Slot to define an app when no other apps are available                        |
+| app-icon        | Slot to define an app icon in top left corner                                 |
 | usermenu        | Slot to fill in the usermenu                                                  |
 | avatar          | Slot to replace the whole avatar                                              |
 | avatar-image    | Slot to set image of the user avatar                                          |

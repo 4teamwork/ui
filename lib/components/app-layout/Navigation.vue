@@ -8,14 +8,12 @@
     class="ftw-navigation"
   >
     <div :class="miniVariant ? 'px-0' : 'px-4'" class="d-flex padding-trasition ftw-navigation-head mb-7">
-      <AppSwitcher :apps="apps" :current-app="currentApp" v-on="$listeners">
-        <template v-slot:fallback-app>
-          <slot name="fallback-app" />
-        </template>
-      </AppSwitcher>
+      <div class="primary d-flex align-center justify-center" style="min-width: 50px">
+        <slot name="app-icon" />
+      </div>
       <v-fade-transition>
         <div v-if="!miniVariant" class="d-flex flex-column grow justify-center ml-2">
-          <span class="font-weight-medium">{{ currentAppName }}</span>
+          <span class="font-weight-medium">{{ appName }}</span>
           <span class="ftw-navigation-subtitle">{{ customer }}</span>
         </div>
       </v-fade-transition>
@@ -25,7 +23,7 @@
     <div :class="miniVariant ? 'pr-4' : 'px-4'" class="pb-4 padding-trasition">
       <v-fade-transition>
         <div v-if="!miniVariant">
-          <span class="caption bodylight--text text-no-wrap">{{ `${currentAppName} ${version}` }}</span>
+          <span class="caption bodylight--text text-no-wrap">{{ `${appName} ${version}` }}</span>
           <div class="d-flex pb-4 pt-2 align-center">
             <span class="caption bodylight--text text-no-wrap pr-1">Created by</span>
             <CompanyLogo />
@@ -58,23 +56,14 @@
 </template>
 
 <script>
-import AppSwitcher from './AppSwitcher.vue'
 import NavigationButton from './NavigationButton.vue'
 import CompanyLogo from './CompanyLogo.vue'
 
 export default {
   name: 'Navigation',
-  components: { AppSwitcher, NavigationButton, CompanyLogo },
+  components: { NavigationButton, CompanyLogo },
   inheritAttrs: false,
   props: {
-    apps: {
-      type: Array,
-      default: () => [],
-    },
-    currentApp: {
-      type: Object,
-      default: () => null,
-    },
     customer: {
       type: String,
       default: () => '',
@@ -98,11 +87,6 @@ export default {
     miniVariant: {
       type: Boolean,
       default: () => false,
-    },
-  },
-  computed: {
-    currentAppName() {
-      return (this.currentApp && this.currentApp.title) || this.appName
     },
   },
   methods: {

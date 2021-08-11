@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [app-switcher] Introduce the app-switcher as a separate component
+
 ## [1.0.1] - 2021-08-11
 
 - Remove unnecessary build step and cleanup dependencies
