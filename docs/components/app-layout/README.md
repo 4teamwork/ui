@@ -11,7 +11,7 @@ The navigation is collapsible to safe space for moblie devices.
 
 ``` vue
 <template>
-    <AppLayout />
+    <ftw-app-layout />
 </template>
 ```
 
@@ -21,7 +21,7 @@ The following example defines apps, navigation, toolbar and the usermenu.
 
 ``` vue
 <template>
-  <AppLayout show-help show-feedback :mini-variant.sync="miniVariant" :apps="apps" :current-app.sync="currentApp">
+  <ftw-app-layout show-help show-feedback :mini-variant.sync="miniVariant" :apps="apps" :current-app.sync="currentApp">
 
     <template #fallback-app>
       <v-icon>mdi-bird</v-icon>
@@ -101,7 +101,7 @@ The following example defines apps, navigation, toolbar and the usermenu.
       <Nuxt />
     </v-main>
 
-  </AppLayout>
+  </ftw-app-layout>
 </template>
 
 <script>
