@@ -96,7 +96,7 @@ export default {
   watch: {
     filter: {
       handler() {
-        this.page = 1
+        this.maybeResetPage()
         this.update()
       },
       deep: true,
@@ -106,7 +106,7 @@ export default {
       this.update()
     },
     pageSize() {
-      this.page = 1
+      this.maybeResetPage()
       this.update()
     },
   },
@@ -131,7 +131,6 @@ export default {
       } catch (error) {
         if (get(error, 'response.status') === 404 && this.page > 1) {
           this.page = 1
-          this.update()
           return
         }
         this.items = { count: 0, results: [] }
@@ -140,6 +139,11 @@ export default {
         this.$emit('update:loading', false)
       }
     }, 400),
+    maybeResetPage() {
+      if (this.page !== 1) {
+        this.page = 1
+      }
+    },
   },
   i18n: {
     messages: {
