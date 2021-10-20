@@ -3,7 +3,7 @@
 The `ftw-app-layout` component is used to provide the application layout for all 4teamwork applications.
 The design is derived from the OneGov GEVER product. Various slots provide entrypoints for customizations.
 The layout provides components such as the toolbar, usermenu, navigation, help- and feedback buttons.
-The navigation is collapsible to safe space for moblie devices.
+The navigation is collapsible to safe space for mobile devices.
 
 ![App Switcher](./images/app_layout.png)
 
