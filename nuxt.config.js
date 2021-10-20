@@ -25,7 +25,7 @@ module.exports = {
     },
   ],
   buildModules: ['@nuxtjs/vuetify'],
-  modules: ['@nuxtjs/i18n'],
+  modules: ['@nuxt/http', '@nuxtjs/i18n'],
   i18n: {
     strategy: 'prefix',
     locales: [
