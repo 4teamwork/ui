@@ -1,8 +1,11 @@
 {
-    "plugins": {
-      "@release-it/keep-a-changelog": {
-        "filename": "./docs/changelog/README.md",
-        "addUnreleased": true
-      }
+  "plugins": {
+    "@release-it/keep-a-changelog": {
+      "filename": "./docs/changelog/README.md",
+      "addUnreleased": true
     }
+  },
+  "hooks": {
+    "after:release": "./publish-docs.sh"
   }
+}
