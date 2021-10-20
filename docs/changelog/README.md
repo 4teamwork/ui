@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [serverside-collection] Introduce a new component to render data fetched from a backend in a table or list.
+
 ## [1.1.0] - 2021-08-11
 
 - [app-switcher] Introduce the app-switcher as a separate component
