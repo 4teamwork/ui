@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column">
-    <template v-for="(item, index) in items.results">
+    <template v-for="(item, index) in items">
       <slot name="item" v-bind="{ item, index }" />
     </template>
-    <slot name="items" v-bind="{ items: items.results }" />
+    <slot name="items" v-bind="{ items }" />
     <v-spacer />
     <v-container fluid class="d-flex align-center">
-      <template v-if="!loading">
+      <template v-if="!loading && !disablePagination">
         <v-pagination
           v-model="page"
           :length="pagesCount"
@@ -41,17 +41,17 @@ import debounceAsync from 'debounce-async'
 import omit from 'lodash/omit'
 import pickBy from 'lodash/pickBy'
 import get from 'lodash/get'
+import set from 'lodash/set'
 import { mapQueryParam } from '../../util/query'
+
+const defaultItemsPerPageOptions = [50, 100, 200]
 
 export default {
   name: 'ServersideIterator',
   props: {
     fetch: {
       type: Function,
-      default: () => ({
-        count: 0,
-        results: [],
-      }),
+      default: () => (filter) => ({}),
     },
     filter: {
       type: Object,
@@ -61,43 +61,87 @@ export default {
       type: Boolean,
       default: () => true,
     },
+    disablePagination: {
+      type: Boolean,
+      default: () => false,
+    },
+    itemsPerPageOptions: {
+      type: Array,
+      default: () => defaultItemsPerPageOptions,
+    },
+    itemsPerPageDefault: {
+      type: Number,
+      default: () => 50,
+      validator: (v) => {
+        return defaultItemsPerPageOptions.includes(v)
+      }
+    },
+    countProperty: {
+      type: String,
+      default: () => 'count',
+    },
+    itemsProperty: {
+      type: String,
+      default: () => 'results',
+    },
+    pageSizeParam: {
+      type: String,
+      default: () => 'pageSize',
+    },
+    pageParam: {
+      type: String,
+      default: () => 'page',
+    },
   },
   data() {
     return {
-      items: { count: 0, results: [] },
-      pageSelection: [50, 100, 200].map((size) => ({
+      result: this.createEmptyResult(),
+      pageSelection: this.itemsPerPageOptions.map((size) => ({
         value: size,
         text: this.$t('serversideIterator.paginationSizeEntry', { size }),
       })),
     }
   },
   computed: {
-    pageSize: mapQueryParam('pageSize', {
-      defaultValue: 50,
+    count() {
+      return get(this.result, this.countProperty, 0)
+    },
+    items() {
+      return get(this.result, this.itemsProperty, [])
+    },
+    pageSize: mapQueryParam((vm) => vm.pageSizeParam, {
+      defaultValue: (vm) => vm.itemsPerPageDefault,
       transformer: (value) => Number.parseInt(value, 10),
-      queryTransformer: (query) => omit(query, ['page']),
+      queryTransformer: (query, vm) => omit(query, [vm.pageParam]),
     }),
-    page: mapQueryParam('page', { defaultValue: 1, transformer: (value) => Number.parseInt(value, 10) }),
+    page: mapQueryParam((vm) => vm.pageParam, {
+      defaultValue: () => 1,
+      transformer: (value) => Number.parseInt(value, 10),
+    }),
     pagesCount() {
-      return Math.ceil(this.items.count / this.pageSize)
+      return Math.ceil(this.count / this.pageSize)
     },
     computedFilter() {
-      return pickBy({ pageSize: this.pageSize, ...this.filter, page: this.page }, Boolean)
+      return pickBy({ [this.pageSizeParam]: this.pageSize, ...this.filter, [this.pageParam]: this.page }, Boolean)
     },
     listPaginationCaption() {
-      if (!this.items.count) {
+      if (!this.count) {
         return ''
       }
       const from = (this.page - 1) * this.pageSize + 1
-      const to = Math.min(this.page * this.pageSize, this.items.count)
-      return this.$t('serversideIterator.paginationCaption', { from, to, total: this.items.count })
+      const to = Math.min(this.page * this.pageSize, this.count)
+      return this.$t('serversideIterator.paginationCaption', { from, to, total: this.count })
     },
   },
   watch: {
     filter: {
-      handler() {
-        this.maybeResetPage()
-        this.update()
+      handler(_, previous) {
+        // On immediate handler, do not reset page.
+        if (previous) {
+          this.maybeResetPage()
+        } else {
+          this.update()
+        }
       },
       deep: true,
       immediate: true,
@@ -107,7 +151,6 @@ export default {
     },
     pageSize() {
       this.maybeResetPage()
-      this.update()
     },
   },
   methods: {
@@ -120,6 +163,12 @@ export default {
         }
       }
     },
+    createEmptyResult() {
+      const result = {}
+      set(result, this.countProperty, 0)
+      set(result, this.itemsProperty, [])
+      return result
+    },
     debouncedUpdate: debounceAsync(async function debouncedUpdate() {
       this.$router.push({
         name: this.$route.name,
@@ -127,13 +176,13 @@ export default {
       })
       this.$emit('update:loading', true)
       try {
-        this.items = await this.fetch(this.computedFilter)
+        this.result = await this.fetch(this.computedFilter)
       } catch (error) {
         if (get(error, 'response.status') === 404 && this.page > 1) {
           this.page = 1
           return
         }
-        this.items = { count: 0, results: [] }
+        this.result = this.createEmptyResult()
         throw error
       } finally {
         this.$emit('update:loading', false)
@@ -141,7 +190,10 @@ export default {
     }, 400),
     maybeResetPage() {
       if (this.page !== 1) {
+        // The watcher will trigger an update.
         this.page = 1
+      } else {
+        this.update()
       }
     },
   },

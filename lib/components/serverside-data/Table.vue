@@ -2,8 +2,8 @@
   <v-data-table
     class="gever-table"
     dense
-    :disable-pagination="disablePagination"
-    :hide-default-footer="disablePagination"
+    disable-pagination
+    hide-default-footer
     :options="options"
     v-bind="{ ...$attrs, headers: tableHeaders }"
   >
@@ -55,10 +55,6 @@ export default {
   name: 'Table',
   inheritAttrs: false,
   props: {
-    disablePagination: {
-      type: Boolean,
-      default: true,
-    },
     options: {
       type: Object,
       default: () => ({}),
@@ -66,10 +62,11 @@ export default {
   },
   computed: {
     tableHeaders() {
+      const headers = this.$attrs.headers.map((h) => ({ ...h, sortable: h.sortable ? h.sortable : false }))
       if (!this.$attrs.icon) {
-        return this.$attrs.headers
+        return headers
       }
-      return [{ text: '', value: 'icon', sortable: false, width: '52px' }, ...this.$attrs.headers]
+      return [{ text: '', value: 'icon', sortable: false, width: '52px' }, ...headers]
     },
   },
   methods: {
