@@ -1,4 +1,6 @@
 /* eslint-disable nuxt/no-cjs-in-config */
+const themes = require('./themes')
+
 module.exports = {
   ssr: false,
   target: 'static',
@@ -24,6 +26,7 @@ module.exports = {
       pathPrefix: false,
     },
   ],
+  vuetify: { theme: { options: { customProperties: true }, themes } },
   buildModules: ['@nuxtjs/vuetify'],
   modules: ['@nuxt/http', '@nuxtjs/i18n'],
   i18n: {

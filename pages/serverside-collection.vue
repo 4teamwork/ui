@@ -36,6 +36,17 @@
           </v-list-item-content>
         </v-list-item>
       </template>
+      <template #actions="{ item }">
+        <TableActionButton
+          title="Visit"
+          class="pa-0 table-action-button"
+          :href="`https://icanhazdadjoke.com/j/${item.id}`"
+        >
+          <template #default>
+            <v-icon size="20">mdi-airplane</v-icon>
+          </template>
+        </TableActionButton>
+      </template>
     </ServersideCollection>
   </div>
 </template>
