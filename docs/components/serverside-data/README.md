@@ -195,6 +195,8 @@ The component passes all props to its child components, e.g. it passes the `head
 | ``item``        | Slot to set the layout used for the listing representation displayed on small screens. |
 | ``title``       | Slot used to render a title at the top of each table row.                              |
 
+Additionally, the component passes all slots to its child components, e.g. the slot ``item.<name>`` can be used to customize a specific column.
+
 ## Functions
 
 To access the functions a ````ref```` needs to be defined on the table (i.e. ref="tableName") and the functions are
@@ -204,5 +206,3 @@ called like: this.$ref.tableName.function()
 |-----------------|----------------------------------------------------------------------------------------|
 | ``update``      | Updates the data in the table |
 
-
-Additionally, the component passes all slots to its child components, e.g. the slot ``item.<name>`` can be used to customize a specific column.
