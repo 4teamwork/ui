@@ -4,7 +4,7 @@ A collection of vue components used in different applications of 4teamwork. The 
 
 ## Installation
 
-ftw-ui can be added using the npm module.
+@4tw/ui can be added using the npm module.
 
 ``` sh
 yarn add @4tw/ui

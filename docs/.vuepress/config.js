@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/ftw-ui/',
+  base: '/ui/',
   themeConfig: {
     sidebarDepth: 0,
     sidebar: [

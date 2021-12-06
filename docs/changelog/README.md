@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Rename repo from ftw-ui to ui.
+
 ## [1.2.1] - 2021-11-18
 
 - [table-action-button] Introduced a new component ``TableActionButton`` to provide a uniformly styled button.
