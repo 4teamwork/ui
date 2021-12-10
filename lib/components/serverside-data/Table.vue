@@ -28,12 +28,21 @@
             <td v-if="$attrs.icon" class="icon-cell pl-6 pr-1" rowspan="2" style="width: 0">
               <v-icon width="18px" height="18px">{{ $attrs.icon }}</v-icon>
             </td>
-            <td v-if="$scopedSlots.title" class="title-cell pr-6 font-weight-bold text-decoration-none" :colspan="$attrs.headers.length">
+            <td
+              v-if="$scopedSlots.title"
+              class="title-cell pr-6 font-weight-bold text-decoration-none"
+              :colspan="headers.length"
+            >
               <slot name="title" v-bind="{ item }" />
             </td>
           </tr>
           <tr>
-            <td v-for="header in $attrs.headers" :key="header.value" class="content-cell" :class="{'without-title': !$scopedSlots.title}">
+            <td
+              v-for="header in headers"
+              :key="header.value"
+              class="content-cell"
+              :class="{ 'without-title': !$scopedSlots.title }"
+            >
               <slot :name="`item.${header.value}`" v-bind="{ item }">
                 {{ item[header.value] }}
               </slot>
@@ -62,11 +71,14 @@ export default {
   },
   computed: {
     tableHeaders() {
-      const headers = this.$attrs.headers.map((h) => ({ ...h, sortable: h.sortable ? h.sortable : false }))
+      const headers = this.headers.map((h) => ({ ...h, sortable: h.sortable ? h.sortable : false }))
       if (!this.$attrs.icon) {
         return headers
       }
       return [{ text: '', value: 'icon', sortable: false, width: '52px' }, ...headers]
+    },
+    headers() {
+      return get(this.$attrs, 'headers', [])
     },
   },
   methods: {
