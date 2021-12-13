@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [serverside-collection] Fix: Prevent error when no headers are defined.
 - Rename repo from ftw-ui to ui.
 
 ## [1.2.1] - 2021-11-18
