@@ -1,18 +1,20 @@
 <template>
   <v-navigation-drawer
     app
-    permanent
+    :permanent="permanent"
     :width="330"
     :mini-variant-width="50"
-    :mini-variant="miniVariant"
+    :mini-variant="computedMiniVariant"
+    :value="showNavigation"
     class="ftw-navigation"
+    @input="$emit('update:show-navigation', $event)"
   >
-    <div :class="miniVariant ? 'px-0' : 'px-4'" class="d-flex padding-trasition ftw-navigation-head mb-7">
+    <div :class="computedMiniVariant ? 'px-0' : 'px-4'" class="d-flex padding-trasition ftw-navigation-head mb-7">
       <div class="primary d-flex align-center justify-center" style="min-width: 50px">
         <slot name="app-icon" />
       </div>
       <v-fade-transition>
-        <div v-if="!miniVariant" class="d-flex flex-column grow justify-center ml-2">
+        <div v-if="!computedMiniVariant" class="d-flex flex-column grow justify-center ml-2">
           <span class="font-weight-medium">{{ appName }}</span>
           <span class="ftw-navigation-subtitle">{{ customer }}</span>
         </div>
@@ -20,9 +22,9 @@
     </div>
     <slot name="navigation-main" />
     <v-spacer />
-    <div :class="miniVariant ? 'pr-4' : 'px-4'" class="pb-4 padding-trasition">
+    <div :class="computedMiniVariant ? 'pr-4' : 'px-4'" class="pb-4 padding-trasition">
       <v-fade-transition>
-        <div v-if="!miniVariant">
+        <div v-if="!computedMiniVariant">
           <span class="caption bodylight--text text-no-wrap">{{ `${appName} ${version}` }}</span>
           <div class="d-flex pb-4 pt-2 align-center">
             <span class="caption bodylight--text text-no-wrap pr-1">Created by</span>
@@ -32,7 +34,7 @@
       </v-fade-transition>
       <div class="d-flex">
         <v-fade-transition>
-          <div v-if="!miniVariant" class="d-flex overflow-hidden">
+          <div v-if="!computedMiniVariant" class="d-flex overflow-hidden">
             <NavigationButton v-if="showHelp" class="mr-3" @click="help">
               <v-icon small>mdi-help-circle</v-icon>
               <span class="ml-1">{{ $t('appLayout.help') }}</span>
@@ -44,9 +46,9 @@
           </div>
         </v-fade-transition>
         <v-spacer />
-        <NavigationButton rounded class="pa-0 ml-2" @click="toggleMiniVariant">
+        <NavigationButton rounded class="pa-0 ml-2" @click="permanent ? toggleMiniVariant() : toggleShowNavigation()">
           <v-fade-transition>
-            <v-icon v-if="miniVariant">mdi-chevron-right</v-icon>
+            <v-icon v-if="computedMiniVariant">mdi-chevron-right</v-icon>
             <v-icon v-else>mdi-chevron-left</v-icon>
           </v-fade-transition>
         </NavigationButton>
@@ -88,6 +90,19 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    permanent: {
+      type: Boolean,
+      default: () => true,
+    },
+    showNavigation: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+  computed: {
+    computedMiniVariant() {
+      return this.permanent ? this.miniVariant : false
+    },
   },
   methods: {
     help() {
@@ -95,6 +110,9 @@ export default {
     },
     feedback() {
       this.$emit('feedback')
+    },
+    toggleShowNavigation() {
+      this.$emit('update:show-navigation', !this.showNavigation)
     },
     toggleMiniVariant() {
       this.$emit('update:mini-variant', !this.miniVariant)

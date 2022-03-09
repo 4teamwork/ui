@@ -118,23 +118,26 @@ export default {
 
 ## Props
 
-| Name         | Type    | Default | Description                                           |
-|--------------|---------|---------|-------------------------------------------------------|
-| apps         | Array   | []      | The apps listed in the AppSwitcher                    |
-| appName      | String  | ''      | The current apps name                                 |
-| customer     | String  | ''      | Will be listed in the toolbar next to the AppSwitcher |
-| version      | String  | ''      | Will be listed next to the company attribution        |
-| showHelp     | Boolean | false   | Enables the Help Button                               |
-| showFeedback | Boolean | false   | Enables the feedback Button                           |
-| miniVariant  | Boolean | false   | Enables the mini variant of the navigation            |
+| Name           | Type    | Default | Description                                                                 |
+|----------------|---------|---------|-----------------------------------------------------------------------------|
+| apps           | Array   | []      | The apps listed in the AppSwitcher                                          |
+| appName        | String  | ''      | The current apps name                                                       |
+| customer       | String  | ''      | Will be listed in the toolbar next to the AppSwitcher                       |
+| version        | String  | ''      | Will be listed next to the company attribution                              |
+| showHelp       | Boolean | false   | Enables the Help Button                                                     |
+| showFeedback   | Boolean | false   | Enables the feedback Button                                                 |
+| miniVariant    | Boolean | false   | Enables the mini variant of the navigation                                  |
+| permanent      | Boolean | true    | The drawer remains visible regardless of screen size                        |
+| showNavigation | Boolean | false   | Reveals the Navigation. This has only effect if permanent is set to *false* |
 
 ## Events
 
-| Name                | Description                                                                        |
-|---------------------|------------------------------------------------------------------------------------|
-| help                | Emits when the help button has been clicked                                        |
-| feedback            | Emits when the feedback button has been clicked                                    |
-| update:mini-variant | Emits the current state of the mini variant when the mini variant has been changed |
+| Name                   | Description                                                                        |
+|------------------------|------------------------------------------------------------------------------------|
+| help                   | Emits when the help button has been clicked                                        |
+| feedback               | Emits when the feedback button has been clicked                                    |
+| update:mini-variant    | Emits the current state of the mini variant when the mini variant has been changed |
+| update:show-navigation | Emits the current state of the drawer value when show navigation has been changed  |
 
 ## Slots
 
