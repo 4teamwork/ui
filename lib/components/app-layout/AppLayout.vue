@@ -7,8 +7,10 @@
         :version="version"
         :show-help="showHelp"
         :show-feedback="showFeedback"
+        :permanent="permanent"
         :mini-variant="miniVariant"
         :app-name="appName"
+        :show-navigation="showNavigation"
         v-on="$listeners"
       >
         <template v-slot:navigation-main>
@@ -71,6 +73,14 @@ export default {
       default: () => false,
     },
     miniVariant: {
+      type: Boolean,
+      default: () => false,
+    },
+    permanent: {
+      type: Boolean,
+      default: () => true,
+    },
+    showNavigation: {
       type: Boolean,
       default: () => false,
     },
