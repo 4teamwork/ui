@@ -29,9 +29,9 @@
             :disabled="app.disabled"
             @click="setCurrentApp(app)"
           >
-            <v-list-item-icon class="mr-2">
+            <v-list-item-icon class="mr-2 align-center">
               <div :style="`width: 20px; height: 20px; background-color: ${app.color}`">
-                <img :src="base64ImageURI(app.svg_icon)" />
+                <img width="100%" :src="base64ImageURI(app.svg_icon)" />
               </div>
             </v-list-item-icon>
             <v-list-item-title>{{ app.title }}</v-list-item-title>
