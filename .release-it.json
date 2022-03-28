@@ -6,6 +6,7 @@
     }
   },
   "hooks": {
+    "before:init": "if ! (git branch --show-current | grep  \"^master$\"); then exit 1 ; fi",
     "after:release": "./publish-docs.sh"
   }
 }
