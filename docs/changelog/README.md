@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [app-switcher] Fixing the width and alignment of the icons
+
 ## [1.2.2] - 2022-03-10
 
 - [serverside-collection] Fix: Prevent error when no headers are defined.
