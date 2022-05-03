@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [serverside-collection] Added a new component ``CustomTable`` to provide a more tabular layout option.
+
 ## [1.2.3] - 2022-03-28
 
 - [app-switcher] Fixing the width and alignment of the icons

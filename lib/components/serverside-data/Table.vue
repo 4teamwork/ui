@@ -6,6 +6,7 @@
     hide-default-footer
     :options="options"
     v-bind="{ ...$attrs, headers: tableHeaders }"
+    v-on="$listeners"
   >
     <template #body="{ items }">
       <tbody v-if="$attrs.loading">
