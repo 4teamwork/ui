@@ -72,9 +72,6 @@ export default {
     itemsPerPageDefault: {
       type: Number,
       default: () => 50,
-      validator: (v) => {
-        return defaultItemsPerPageOptions.includes(v)
-      }
     },
     countProperty: {
       type: String,
