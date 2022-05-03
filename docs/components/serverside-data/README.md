@@ -183,6 +183,7 @@ export default {
 | pageSizeParam       | String   | ``'pageSize'``       | The query parameter expected by the backend to set the number of elements returned at once.                                                                                                      |
 | pageParam           | String   | ``'page'``           | The query parameter expected by the backend used for the pagination control.                                                                                                                     |
 | tableStyle          | String   | ``'table'``          | Change the table layout. Available values are ``['table', 'custom-table']``                                                                                                                      |
+| value               | Array    | ``[]``               | Used for controlling selected rows.                                                                                                                                                              |
 
 The component passes all props to its child components, e.g. it passes the `headers` property to the underlying ``<v-data-table>``.
 
@@ -192,6 +193,7 @@ The component passes all props to its child components, e.g. it passes the `head
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------|
 | update:loading | Emits the loading state of the component.                                                                                           |
 | update:options | Emits the options state for the underlying v-data-table component. You can use this to change the sorting when a header is clicked. |
+| input          | Emits an array of selected items when the selection is changed.                                                                     |
 
 ## Slots
 
