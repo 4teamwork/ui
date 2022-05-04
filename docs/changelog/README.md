@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2022-05-04
+
 - [serverside-collection] Added a new component ``CustomTable`` to provide a more tabular layout option.
 - [serverside-collection] Keep track of selected items using `v-model`.
 
