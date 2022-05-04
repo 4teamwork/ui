@@ -3,7 +3,7 @@
     <template v-for="(item, index) in items">
       <slot name="item" v-bind="{ item, index }" />
     </template>
-    <slot name="items" v-bind="{ items }" />
+    <slot name="items" v-bind="{ count, items }" />
     <v-spacer />
     <v-container fluid class="d-flex align-center">
       <template v-if="!loading && !disablePagination">
@@ -72,9 +72,6 @@ export default {
     itemsPerPageDefault: {
       type: Number,
       default: () => 50,
-      validator: (v) => {
-        return defaultItemsPerPageOptions.includes(v)
-      }
     },
     countProperty: {
       type: String,

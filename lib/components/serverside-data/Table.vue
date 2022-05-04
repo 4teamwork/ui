@@ -1,13 +1,19 @@
 <template>
   <v-data-table
     class="gever-table"
+    :class="{ 'show-icon': showIcon, 'show-select': showSelect }"
     dense
     disable-pagination
     hide-default-footer
     :options="options"
     v-bind="{ ...$attrs, headers: tableHeaders }"
+    v-on="$listeners"
   >
-    <template #body="{ items }">
+    <template #header.data-table-select="{ on, props }">
+      <v-simple-checkbox :indeterminate="props.indeterminate" :ripple="false" :value="props.value" v-on="on" />
+    </template>
+
+    <template #body="{ isSelected, items, select }">
       <tbody v-if="$attrs.loading">
         <tr>
           <td colspan="100">
@@ -23,9 +29,17 @@
         </tr>
       </tbody>
       <template v-else>
-        <tbody v-for="item in items" :id="item.id" :key="item.id" :class="{ selected: $route.hash === `#${item.id}` }">
+        <tbody
+          v-for="item in items"
+          :id="item.id"
+          :key="item.id"
+          :class="{ highlighted: $route.hash === `#${item.id}`, selected: isSelected(item) }"
+        >
           <tr>
-            <td v-if="$attrs.icon" class="icon-cell pl-6 pr-1" rowspan="2" style="width: 0">
+            <td v-if="showSelect" class="select-cell" rowspan="2">
+              <v-simple-checkbox :ripple="false" :value="isSelected(item)" @input="select(item, $event)" />
+            </td>
+            <td v-if="showIcon" class="icon-cell pl-6 pr-1" rowspan="2" style="width: 0">
               <v-icon width="18px" height="18px">{{ $attrs.icon }}</v-icon>
             </td>
             <td
@@ -72,13 +86,19 @@ export default {
   computed: {
     tableHeaders() {
       const headers = this.headers.map((h) => ({ ...h, sortable: h.sortable ? h.sortable : false }))
-      if (!this.$attrs.icon) {
+      if (!this.showIcon) {
         return headers
       }
-      return [{ text: '', value: 'icon', sortable: false, width: '52px' }, ...headers]
+      return [{ text: '', value: 'icon', sortable: false, width: '1px' }, ...headers]
     },
     headers() {
       return get(this.$attrs, 'headers', [])
+    },
+    showIcon() {
+      return !!this.$attrs.icon
+    },
+    showSelect() {
+      return 'show-select' in this.$attrs
     },
   },
   methods: {
@@ -115,7 +135,7 @@ export default {
   tbody {
     position: relative;
 
-    &.selected {
+    &.highlighted {
       background-color: #ffff99;
     }
 
@@ -137,7 +157,8 @@ export default {
       }
     }
   }
-  .icon-cell {
+  .icon-cell,
+  .select-cell {
     border-bottom: 1px solid var(--v-greydark-base) !important;
   }
   .content-cell {
@@ -170,6 +191,33 @@ export default {
 
     .v-data-footer__select {
       display: none;
+    }
+  }
+  &.show-icon,
+  &.show-select {
+    th:first-child,
+    .icon-cell,
+    .select-cell {
+      padding-right: 0;
+    }
+
+    tbody {
+      td.select-cell .v-icon {
+        opacity: 0.4;
+      }
+
+      &:hover,
+      &.selected {
+        td.select-cell .v-icon {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &.show-icon.show-select {
+    th:nth-child(2),
+    .icon-cell {
+      padding: 0 !important;
     }
   }
 }

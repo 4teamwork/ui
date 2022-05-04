@@ -1,6 +1,6 @@
 # ftw-serverside-collection
 
-The ``ftw-serverside-collection`` component is used to display data fetched, filtered and sorted by the backend..
+The ``ftw-serverside-collection`` component is used to display data fetched, filtered and sorted by the backend.
 
 On small screens (``$vuetify.breakpoint.smAndDown``), the data is displayed as list items, otherwise as a customized data table.
 
@@ -14,6 +14,9 @@ yarn add debounce-async
 
 Serverside Table:
 ![Serverside Table](./images/serverside-table.png)
+
+Serverside Custom Table (alternative layout):
+![Serverside Custom Table](./images/serverside-custom-table.png)
 
 Serverside Listing:
 ![Serverside Listing](./images/serverside-listing.png)
@@ -49,7 +52,7 @@ export default {
 
 ## Example
 
-The following example fetches data from an external API endpoint and displays it. 
+The following example fetches data from an external API endpoint and displays it.
 Note that this example does not apply any filter, see below for an example with a filter.
 
 ```vue
@@ -179,14 +182,18 @@ export default {
 | itemsProperty       | String   | ``'results'``        | The property of the data (as returned by the ``fetch`` function) containing the list of items.<br>A dotted path notation can be used.                                                            |
 | pageSizeParam       | String   | ``'pageSize'``       | The query parameter expected by the backend to set the number of elements returned at once.                                                                                                      |
 | pageParam           | String   | ``'page'``           | The query parameter expected by the backend used for the pagination control.                                                                                                                     |
+| tableStyle          | String   | ``'table'``          | Change the table layout. Available values are ``['table', 'custom-table']``                                                                                                                      |
+| value               | Array    | ``[]``               | Used for controlling selected rows.                                                                                                                                                              |
 
 The component passes all props to its child components, e.g. it passes the `headers` property to the underlying ``<v-data-table>``.
 
 ## Events
 
-| Name           | Description                               |
-|----------------|-------------------------------------------|
-| update:loading | Emits the loading state of the component. |
+| Name           | Description                                                                                                                         |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| update:loading | Emits the loading state of the component.                                                                                           |
+| update:options | Emits the options state for the underlying v-data-table component. You can use this to change the sorting when a header is clicked. |
+| input          | Emits an array of selected items when the selection is changed.                                                                     |
 
 ## Slots
 
@@ -205,4 +212,3 @@ called like: this.$ref.tableName.function()
 | Name            | Description                                                                            |
 |-----------------|----------------------------------------------------------------------------------------|
 | ``update``      | Updates the data in the table |
-

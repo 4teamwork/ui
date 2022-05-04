@@ -5,12 +5,21 @@
       <a href="https://icanhazdadjoke.com" target="_blank">https://icanhazdadjoke.com</a>.
     </p>
     <TextFilterField v-model="filter.term" class="shrink" />
+    <v-btn-toggle v-model="tableStyle" class="my-2" mandatory>
+      <v-btn value="table" small>
+        <v-icon>mdi-view-sequential</v-icon>
+      </v-btn>
+      <v-btn value="custom-table" small>
+        <v-icon>mdi-view-column</v-icon>
+      </v-btn>
+    </v-btn-toggle>
     <ServersideCollection
       :fetch="loadData"
       :headers="headers"
       :filter="filter"
       :items-per-page-options="[10, 20, 30]"
       :items-per-page-default="10"
+      :table-style="tableStyle"
       count-property="total_jokes"
       page-size-param="limit"
     >
@@ -57,9 +66,20 @@ import { fromQueryString } from '~/lib/util/query'
 export default {
   data() {
     return {
-      headers: [{ text: 'Link', value: 'id' }],
       filter: fromQueryString(this.$route.query, ['term'], { term: '' }),
+      tableStyle: 'table',
     }
+  },
+  computed: {
+    headers() {
+      return [
+        ...(this.showCustomTable ? [{ text: 'Joke', value: 'joke', isTitle: true }] : []),
+        { text: 'Link', value: 'id', sortable: true },
+      ]
+    },
+    showCustomTable() {
+      return this.tableStyle === 'custom-table'
+    },
   },
   methods: {
     loadData(filter) {
