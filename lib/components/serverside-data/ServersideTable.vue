@@ -3,10 +3,13 @@
     <template #items="{ count, items }">
       <component
         :is="tableComponent"
-        v-bind="{ ...tableAttrs, items, icon, loading }"
+        v-bind="{ ...tableAttrs, items, icon, loading, onlyCurrentPageSelected }"
         :server-items-length="count"
         @update:options="$emit('update:options', $event)"
         @input="$emit('input', $event)"
+        @toggle-select-all="toggleSelectAll({ ...$event, count })"
+        @current-items="toggleSelectAll({ value: false })"
+        @item-selected="toggleSelectAll({ value: false })"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>
@@ -49,6 +52,7 @@ export default {
   data() {
     return {
       loading: true,
+      onlyCurrentPageSelected: false,
     }
   },
   computed: {
@@ -60,6 +64,13 @@ export default {
     },
   },
   methods: {
+    toggleSelectAll({ count, items = [], value }) {
+      if (value && items.length < count) {
+        this.onlyCurrentPageSelected = true
+        return
+      }
+      this.onlyCurrentPageSelected = false
+    },
     update() {
       this.$refs.iterator.update()
     },

@@ -22,7 +22,11 @@
       :table-style="tableStyle"
       count-property="total_jokes"
       page-size-param="limit"
+      show-select
     >
+      <template #select-all-warning="{ count, items }">
+        {{ `${items.length} jokes on this page are selected (total jokes: ${count}).` }}
+      </template>
       <template #title="{ item: { joke } }">
         {{ joke }}
       </template>

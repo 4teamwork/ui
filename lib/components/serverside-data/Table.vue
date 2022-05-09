@@ -13,7 +13,7 @@
       <v-simple-checkbox :indeterminate="props.indeterminate" :ripple="false" :value="props.value" v-on="on" />
     </template>
 
-    <template #body="{ isSelected, items, select }">
+    <template #body="{ isSelected, items, select, pagination: { itemsLength } }">
       <tbody v-if="$attrs.loading">
         <tr>
           <td colspan="100">
@@ -29,6 +29,11 @@
         </tr>
       </tbody>
       <template v-else>
+        <tr v-if="$attrs.onlyCurrentPageSelected && $scopedSlots['select-all-warning']">
+          <td class="body-2 px-5 py-3 warning" colspan="100">
+            <slot v-bind="{ count: itemsLength, items }" name="select-all-warning" />
+          </td>
+        </tr>
         <tbody
           v-for="item in items"
           :id="item.id"
