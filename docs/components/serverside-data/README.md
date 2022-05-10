@@ -197,10 +197,11 @@ The component passes all props to its child components, e.g. it passes the `head
 
 ## Slots
 
-| Name            | Description                                                                            |
-|-----------------|----------------------------------------------------------------------------------------|
-| ``item``        | Slot to set the layout used for the listing representation displayed on small screens. |
-| ``title``       | Slot used to render a title at the top of each table row.                              |
+| Name                   | Description                                                                                          |
+|------------------------|------------------------------------------------------------------------------------------------------|
+| ``item``               | Slot to set the layout used for the listing representation displayed on small screens.               |
+| ``title``              | Slot used to render a title at the top of each table row.                                            |
+| ``select-all-warning`` | Slot used to render a warning, informing users, that not all items on every page have been selected. |
 
 Additionally, the component passes all slots to its child components, e.g. the slot ``item.<name>`` can be used to customize a specific column.
 
