@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [serverside-collection] Make `select-all-warning` slot more customizable by using a `v-alert` component and adding a CSS class.
 ## [1.4.0] - 2022-05-10
 
 - [serverside-collection] Introduce a slot to show a warning when only the current page is being selected.
