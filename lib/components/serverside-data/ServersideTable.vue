@@ -3,13 +3,13 @@
     <template #items="{ count, items }">
       <component
         :is="tableComponent"
-        v-bind="{ ...tableAttrs, items, icon, loading, onlyCurrentPageSelected }"
+        v-bind="{ ...tableAttrs, items, icon, loading, onlyCurrentPageSelected, value }"
         :server-items-length="count"
         @update:options="$emit('update:options', $event)"
         @input="$emit('input', $event)"
         @toggle-select-all="toggleSelectAll({ ...$event, count })"
-        @current-items="toggleSelectAll({ value: false })"
-        @item-selected="toggleSelectAll({ value: false })"
+        @current-items="itemsChanged"
+        @item-selected="itemSelectionChanged"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>
@@ -48,6 +48,10 @@ export default {
       default: () => 'table',
       validator: (v) => Object.keys(stylesEnum).includes(v),
     },
+    value: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -64,10 +68,27 @@ export default {
     },
   },
   methods: {
-    toggleSelectAll({ count, items = [], value }) {
+    itemSelectionChanged(props) {
+      this.onlyCurrentPageSelected = false
+      this.$emit('item-selected', props)
+    },
+    itemsChanged(props) {
+      this.onlyCurrentPageSelected = false
+      this.$emit('current-items', props)
+    },
+    toggleSelectAll({ count, items, value }) {
       if (value && items.length < count) {
         this.onlyCurrentPageSelected = true
         return
+      }
+      if (!value) {
+        // Make sure all selected items on any page are deselected. By doing this we
+        // add a slightly inconsistend behaviour to the component because toggling
+        // to `true` will only select all items on the current page.
+        // In our opinion deselecting all items is more important than just
+        // deselecting the current page. Also, Google mail behaves in a similar way
+        // and we based the interaction model largely on this application.
+        this.$emit('input', [])
       }
       this.onlyCurrentPageSelected = false
     },

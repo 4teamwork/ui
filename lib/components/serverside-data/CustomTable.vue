@@ -14,8 +14,10 @@
 
     <template #body.prepend="{ items, pagination: { itemsLength } }">
       <tr v-if="$attrs.onlyCurrentPageSelected && $scopedSlots['select-all-warning']">
-        <td class="body-2 px-5 py-3 warning" colspan="100">
-          <slot v-bind="{ count: itemsLength, items }" name="select-all-warning" />
+        <td class="pa-0" colspan="100">
+          <v-alert class="body-2 ma-0 select-all-warning" dense text tile>
+            <slot v-bind="{ count: itemsLength, items }" name="select-all-warning" />
+          </v-alert>
         </td>
       </tr>
     </template>
