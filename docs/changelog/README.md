@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] - 2022-05-11
+
 - [serverside-collection] Make `select-all-warning` slot more customizable by using a `v-alert` component and adding a CSS class.
 - [serverside-collection] Better handle when the `select-all-warning` slot is visible and emit more `v-data-table` events to allow more control over item selection from parent components.
 
