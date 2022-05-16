@@ -14,7 +14,11 @@
           v-on="on"
         >
           <v-icon v-if="hasApps && (hover || menuOpen)" color="primary"> mdi-apps </v-icon>
-          <img v-else-if="currentApp" :src="base64ImageURI(currentApp.svg_icon)" />
+          <img
+            v-else-if="currentApp"
+            style="max-height: 50px; max-width: 50px"
+            :src="base64ImageURI(currentApp.svg_icon)"
+          />
           <slot v-else name="fallback-app" />
         </v-btn>
       </v-hover>
