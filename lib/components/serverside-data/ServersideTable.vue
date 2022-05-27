@@ -1,11 +1,11 @@
 <template>
-  <ServersideIterator ref="iterator" v-bind="$attrs" :loading.sync="loading">
+  <ServersideIterator ref="iterator" v-bind="$attrs" :filter="filter" :loading.sync="loading">
     <template #items="{ count, items }">
       <component
         :is="tableComponent"
         v-bind="{ ...tableAttrs, items, icon, loading, onlyCurrentPageSelected, value }"
         :server-items-length="count"
-        @update:options="$emit('update:options', $event)"
+        @update:options="handleUpdateOptions"
         @input="$emit('input', $event)"
         @toggle-select-all="toggleSelectAll({ ...$event, count })"
         @current-items="itemsChanged"
@@ -21,6 +21,7 @@
 
 <script>
 import omit from 'lodash/omit'
+import zip from 'lodash/zip'
 import ServersideIterator from './ServersideIterator.vue'
 import Table from './Table.vue'
 import CustomTable from './CustomTable.vue'
@@ -39,6 +40,10 @@ export default {
   },
   inheritAttrs: false,
   props: {
+    filter: {
+      type: Object,
+      default: () => ({}),
+    },
     icon: {
       type: String,
       default: () => '',
@@ -75,6 +80,14 @@ export default {
     itemsChanged(props) {
       this.onlyCurrentPageSelected = false
       this.$emit('current-items', props)
+    },
+    handleUpdateOptions(options) {
+      const ordering = zip(options.sortBy, options.sortDesc).map(([sortBy, sortDesc]) => {
+        const sortDirection = sortDesc ? '-' : ''
+        return sortDirection + sortBy
+      })
+      this.filter.ordering = ordering
+      this.$emit('update:options', options)
     },
     toggleSelectAll({ count, items, value }) {
       if (value && items.length < count) {
