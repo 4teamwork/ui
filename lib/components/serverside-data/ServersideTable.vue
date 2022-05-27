@@ -82,17 +82,12 @@ export default {
       this.$emit('current-items', props)
     },
     handleUpdateOptions(options) {
-      if (!options.sortBy.length) {
-        this.filter.ordering = []
-        this.$emit('update:options', options)
-      } else {
-        const ordering = zip(options.sortBy, options.sortDesc).map(([sortBy, sortDesc]) => {
-          const sortDirection = sortDesc ? '-' : ''
-          return sortDirection + sortBy
-        })
-        this.filter.ordering = ordering
-        this.$emit('update:options', options)
-      }
+      const ordering = zip(options.sortBy, options.sortDesc).map(([sortBy, sortDesc]) => {
+        const sortDirection = sortDesc ? '-' : ''
+        return sortDirection + sortBy
+      })
+      this.filter.ordering = ordering
+      this.$emit('update:options', options)
     },
     toggleSelectAll({ count, items, value }) {
       if (value && items.length < count) {
