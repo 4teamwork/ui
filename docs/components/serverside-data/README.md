@@ -113,6 +113,7 @@ export default {
 
 A filter can be defined and modified outside component. If it changes, the component fetches the data again. This works well with the component ``<ftw-text-filter-field>`` for example.
 Similarly, the ordering parameter can be part of the filter. One may use the component ``<ftw-ordering-menu>`` for this.
+The ordering parameter is automatically updated for sortable columns for the `CustomTable` style. The ordering is thereby a list of columns being sorted. The sorting direction is identified by a `-` for descending and no prefix for ascending. This schema is heavily inspired by https://www.django-rest-framework.org/api-guide/filtering/#orderingfilter.
 
 ```vue
 <template>

@@ -70,7 +70,7 @@ import { fromQueryString } from '~/lib/util/query'
 export default {
   data() {
     return {
-      filter: fromQueryString(this.$route.query, ['term'], { term: '' }),
+      filter: fromQueryString(this.$route.query, ['term', 'ordering'], { term: '', ordering: [] }),
       tableStyle: 'table',
     }
   },
