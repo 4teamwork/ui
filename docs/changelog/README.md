@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [serverside-collection] Fix empty ordering for custom tables style.
+
 ## [1.5.0] - 2022-05-27
 
 - [serverside-collection] Handle sorting for custom tables style.
