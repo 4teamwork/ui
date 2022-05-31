@@ -5,13 +5,13 @@
         :is="tableComponent"
         v-bind="{ ...tableAttrs, items, icon, loading, onlyCurrentPageSelected, value }"
         :server-items-length="count"
-        @update:options="handleUpdateOptions"
+        :options.sync="options"
         @input="$emit('input', $event)"
         @toggle-select-all="toggleSelectAll({ ...$event, count })"
         @current-items="itemsChanged"
         @item-selected="itemSelectionChanged"
       >
-        <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+        <template v-for="(index, name) in $scopedSlots" #[name]="data">
           <slot :name="name" v-bind="data"></slot>
         </template>
       </component>
@@ -21,10 +21,11 @@
 
 <script>
 import omit from 'lodash/omit'
+import unzip from 'lodash/unzip'
 import zip from 'lodash/zip'
+import CustomTable from './CustomTable.vue'
 import ServersideIterator from './ServersideIterator.vue'
 import Table from './Table.vue'
-import CustomTable from './CustomTable.vue'
 
 const stylesEnum = {
   table: 'Table',
@@ -62,6 +63,7 @@ export default {
     return {
       loading: true,
       onlyCurrentPageSelected: false,
+      internalOptions: {},
     }
   },
   computed: {
@@ -70,6 +72,32 @@ export default {
     },
     tableComponent() {
       return stylesEnum[this.tableStyle]
+    },
+    options: {
+      get() {
+        const [sortBy, sortDesc] = unzip(
+          this.filter.ordering.map((ordering) => {
+            if (ordering.startsWith('-')) {
+              return [ordering.slice(1), true]
+            } else {
+              return [ordering, false]
+            }
+          }),
+        )
+        return {
+          ...this.internalOptions,
+          sortBy: sortBy || [],
+          sortDesc: sortDesc || [],
+        }
+      },
+      set(options) {
+        const ordering = zip(options.sortBy, options.sortDesc).map(([sortBy, sortDesc]) => {
+          const sortDirection = sortDesc ? '-' : ''
+          return sortDirection + sortBy
+        })
+        this.filter.ordering = ordering
+        this.internalOptions = options
+      },
     },
   },
   methods: {
@@ -80,19 +108,6 @@ export default {
     itemsChanged(props) {
       this.onlyCurrentPageSelected = false
       this.$emit('current-items', props)
-    },
-    handleUpdateOptions(options) {
-      if (!options.sortBy.length) {
-        this.filter.ordering = []
-        this.$emit('update:options', options)
-      } else {
-        const ordering = zip(options.sortBy, options.sortDesc).map(([sortBy, sortDesc]) => {
-          const sortDirection = sortDesc ? '-' : ''
-          return sortDirection + sortBy
-        })
-        this.filter.ordering = ordering
-        this.$emit('update:options', options)
-      }
     },
     toggleSelectAll({ count, items, value }) {
       if (value && items.length < count) {
