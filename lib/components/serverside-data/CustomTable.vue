@@ -2,7 +2,6 @@
   <v-data-table
     v-bind="{ ...$attrs, headers: tableHeaders }"
     :class="{ 'show-icon': showIcon, 'show-select': showSelect }"
-    :options="options"
     class="gever-custom-table"
     dense
     hide-default-footer
@@ -53,12 +52,6 @@ import get from 'lodash/get'
 export default {
   name: 'CustomTable',
   inheritAttrs: false,
-  props: {
-    options: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
   computed: {
     headers() {
       return get(this.$attrs, 'headers', [])

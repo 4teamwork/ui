@@ -5,7 +5,6 @@
     dense
     disable-pagination
     hide-default-footer
-    :options="options"
     v-bind="{ ...$attrs, headers: tableHeaders }"
     v-on="$listeners"
   >
@@ -84,12 +83,6 @@ import get from 'lodash/get'
 export default {
   name: 'Table',
   inheritAttrs: false,
-  props: {
-    options: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
   computed: {
     tableHeaders() {
       const headers = this.headers.map((h) => ({ ...h, sortable: h.sortable ? h.sortable : false }))
