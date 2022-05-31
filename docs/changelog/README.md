@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.2] - 2022-05-31
+
 - [serverside-collection] Refactor ordering for custom tables style. The options property is no longer available.
 
 ## [1.5.1] - 2022-05-27
