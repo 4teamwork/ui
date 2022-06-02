@@ -5,6 +5,7 @@
         v-bind="$attrs"
         :customer="customer"
         :version="version"
+        :hide-app-info="hideAppInfo"
         :show-help="showHelp"
         :show-feedback="showFeedback"
         :permanent="permanent"
@@ -63,6 +64,10 @@ export default {
     version: {
       type: String,
       default: () => '',
+    },
+    hideAppInfo: {
+      type: Boolean,
+      default: () => false,
     },
     showHelp: {
       type: Boolean,

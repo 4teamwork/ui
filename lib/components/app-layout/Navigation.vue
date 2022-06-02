@@ -23,7 +23,7 @@
     <slot name="navigation-main" />
     <v-spacer />
     <div :class="computedMiniVariant ? 'pr-4' : 'px-4'" class="pb-4 padding-trasition">
-      <v-fade-transition>
+      <v-fade-transition v-if="!hideAppInfo">
         <div v-if="!computedMiniVariant">
           <span class="caption bodylight--text text-no-wrap">{{ `${appName} ${version}` }}</span>
           <div class="d-flex pb-4 pt-2 align-center">
@@ -77,6 +77,10 @@ export default {
     version: {
       type: String,
       default: () => '',
+    },
+    hideAppInfo: {
+      type: Boolean,
+      default: () => false,
     },
     showHelp: {
       type: Boolean,

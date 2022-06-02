@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [app-layout] Allow hiding the app information section of the navigation.
+
 ## [1.5.2] - 2022-05-31
 
 - [serverside-collection] Refactor ordering for custom tables style. The options property is no longer available.
