@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [app-switcher] Apps with url values are rendered as anchor elements.
+
 ## [1.5.3] - 2022-06-02
 
 - [app-layout] Allow hiding the app information section of the navigation.
