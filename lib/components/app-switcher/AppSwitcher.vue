@@ -31,6 +31,7 @@
             v-for="(app, index) in apps"
             :key="`app-${index}`"
             :disabled="app.disabled"
+            :href="app.url"
             @click="setCurrentApp(app)"
           >
             <v-list-item-icon class="mr-2 align-center">
