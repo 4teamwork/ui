@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [app-switcher] Set color of active application to blue.
+
 ## [1.6.0] - 2022-08-08
 
 - [app-switcher] Apps with url values are rendered as anchor elements.
