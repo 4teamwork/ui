@@ -40,7 +40,7 @@
               </div>
             </v-list-item-icon>
             <v-list-item-title>{{ app.title }}</v-list-item-title>
-            <v-list-item-action v-if="isCurrentApp(app)" class="caption active--text text-no-wrap grow ml-8">
+            <v-list-item-action v-if="isCurrentApp(app)" class="caption activelabel--text text-no-wrap grow ml-8">
               {{ $t('appSwitcher.currentApp') }}
             </v-list-item-action>
             <v-list-item-action v-else-if="app.disabled" class="caption primary--text text-no-wrap grow ml-8">
