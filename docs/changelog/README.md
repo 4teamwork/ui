@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.2] - 2022-10-04
+
 - [app-switcher] Set color of active application to blue.
 
 ## [1.6.0] - 2022-08-08
