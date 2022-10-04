@@ -1,5 +1,5 @@
 module.exports = {
-  active: '#00b0ff',
+  activelabel: '#00b0ff',
   accent: '#00b0ff', // same as primary
   bodydark: '#37474f',
   bodylight: '#5f7481',
