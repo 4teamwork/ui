@@ -24,7 +24,9 @@ export default {
     },
     placeholder: {
       type: String,
-      default: () => this.$t('textFilterField.placeholder'),
+      default() {
+        return this.$t('textFilterField.placeholder')
+      },
     },
   },
   computed: {
