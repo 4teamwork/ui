@@ -8,7 +8,7 @@
     class="dense"
     background-color="greydark"
     clearable
-    :placeholder="$t('textFilterField.placeholder')"
+    :placeholder="placeholder"
     v-bind="$attrs"
   />
 </template>
@@ -21,6 +21,10 @@ export default {
     value: {
       type: String,
       default: () => '',
+    },
+    placeholder: {
+      type: String,
+      default: () => this.$t('textFilterField.placeholder'),
     },
   },
   computed: {
