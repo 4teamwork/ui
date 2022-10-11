@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [text-filter-field] Pass placeholder value correctly.
+
 ## [1.6.3] - 2022-10-10
 
 - [text-filter-field] Enable custom placeholder text.
