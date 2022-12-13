@@ -173,7 +173,8 @@ export default {
       })
       this.$emit('update:loading', true)
       try {
-        this.result = await this.fetch(this.computedFilter)
+        this.fetchRequests = [...(this.fetchRequests || []), this.fetch(this.computedFilter)]
+        this.result = (await Promise.all(this.fetchRequests)).at(-1)
       } catch (error) {
         if (get(error, 'response.status') === 404 && this.page > 1) {
           this.page = 1
@@ -182,6 +183,7 @@ export default {
         this.result = this.createEmptyResult()
         throw error
       } finally {
+        this.fetchRequests = []
         this.$emit('update:loading', false)
       }
     }, 400),
