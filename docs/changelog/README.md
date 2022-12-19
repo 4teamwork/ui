@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.5] - 2022-12-19
+
 - [serverside-iterator] If `fetch` is called multiple times, only return last result in order to prevent older requests that might run longer to override the last request's results.
 
 ## [1.6.4] - 2022-10-12
