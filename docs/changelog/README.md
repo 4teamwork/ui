@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [publish-docs] `git init` creates a `main` branch but on github the main branch is still called `master`. Use `--initial-branch=master` so both branch name match and docs can still be published.
+
 ## [1.6.5] - 2022-12-19
 
 - [serverside-iterator] If `fetch` is called multiple times, only return last result in order to prevent older requests that might run longer to override the last request's results.
