@@ -28,7 +28,7 @@
         <v-list dense class="extra-dense">
           <v-subheader class="px-4">{{ $t('appSwitcher.yourApplications') }}</v-subheader>
           <v-list-item
-            v-for="(app, index) in apps"
+            v-for="(app, index) in enrichedApps"
             :key="`app-${index}`"
             :disabled="app.disabled"
             :href="app.url"
@@ -55,6 +55,8 @@
 
 <script>
 import isEqual from 'lodash/isEqual'
+import get from 'lodash/get'
+import { icons, colors } from './appsConfig'
 
 export default {
   name: 'AppSwitcher',
@@ -71,6 +73,7 @@ export default {
       default: () => null,
     },
   },
+
   data() {
     return {
       menuOpen: null,
@@ -82,6 +85,12 @@ export default {
     },
     currentAppColor() {
       return this.currentApp && this.currentApp.color
+    },
+    enrichedApps() {
+      return this.apps.map((app) => {
+        const appType = get(app, 'type', '').toLowerCase()
+        return { ...app, color: colors[appType] ?? app.color, svg_icon: icons[appType] ?? app.svg_icon }
+      })
     },
   },
   methods: {
