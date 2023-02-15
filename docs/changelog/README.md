@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2023-02-15
+
 - [publish-docs] `git init` creates a `main` branch but on github the main branch is still called `master`. Use `--initial-branch=master` so both branch name match and docs can still be published.
 - [app-switcher] Add default app configurations for our standard products.
 
