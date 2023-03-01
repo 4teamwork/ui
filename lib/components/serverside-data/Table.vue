@@ -98,7 +98,8 @@ export default {
       return !!this.$attrs.icon
     },
     showSelect() {
-      return 'show-select' in this.$attrs
+      const showSelect = get(this.$attrs, 'show-select', false)
+      return showSelect === '' || showSelect
     },
   },
   methods: {
