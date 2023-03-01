@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.1] - 2023-03-01
+
 - [serverside-collection] properly pass show-select attribute to v-data-table in order to make checkboxes toggleable.
 
 ## [1.7.0] - 2023-02-15
