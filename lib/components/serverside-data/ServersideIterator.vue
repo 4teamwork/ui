@@ -65,6 +65,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    disableRouteSync: {
+      type: Boolean,
+      default: () => false,
+    },
     itemsPerPageOptions: {
       type: Array,
       default: () => defaultItemsPerPageOptions,
@@ -167,10 +171,12 @@ export default {
       return result
     },
     debouncedUpdate: debounceAsync(async function debouncedUpdate() {
-      this.$router.push({
-        name: this.$route.name,
-        query: this.computedFilter,
-      })
+      if (!this.disableRouteSync) {
+        this.$router.push({
+          name: this.$route.name,
+          query: this.computedFilter,
+        })
+      }
       this.$emit('update:loading', true)
       try {
         this.fetchRequests = [...(this.fetchRequests || []), this.fetch(this.computedFilter)]
