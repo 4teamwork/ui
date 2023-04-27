@@ -135,18 +135,6 @@ export default {
     },
   },
   watch: {
-    filter: {
-      handler(_, previous) {
-        // On immediate handler, do not reset page.
-        if (previous) {
-          this.maybeResetPage()
-        } else {
-          this.update()
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
     page() {
       this.update()
     },
@@ -178,6 +166,20 @@ export default {
         this.$emit('update:loading', false)
       }
     }, 400)
+
+    this.$watch('filter', {
+      handler(_, previous) {
+        // On immediate handler, do not reset page.
+        if (previous) {
+          this.maybeResetPage()
+        } else {
+          console.log('filter changed, update() now')
+          this.update()
+        }
+      },
+      deep: true,
+      immediate: true,
+    })
   },
   methods: {
     debouncedUpdate() {}, // overwritten in created() to avoid shared debounces across components
