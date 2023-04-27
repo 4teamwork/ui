@@ -154,23 +154,8 @@ export default {
       this.maybeResetPage()
     },
   },
-  methods: {
-    async update() {
-      try {
-        await this.debouncedUpdate()
-      } catch (error) {
-        if (error !== 'canceled') {
-          throw error
-        }
-      }
-    },
-    createEmptyResult() {
-      const result = {}
-      set(result, this.countProperty, 0)
-      set(result, this.itemsProperty, [])
-      return result
-    },
-    debouncedUpdate: debounceAsync(async function debouncedUpdate() {
+  created() {
+    this.debouncedUpdate = debounceAsync(async function debouncedUpdate() {
       if (!this.disableRouteSync) {
         this.$router.push({
           name: this.$route.name,
@@ -192,7 +177,25 @@ export default {
         this.fetchRequests = []
         this.$emit('update:loading', false)
       }
-    }, 400),
+    }, 400)
+  },
+  methods: {
+    debouncedUpdate() {}, // overwritten in created() to avoid shared debounces across components
+    async update() {
+      try {
+        await this.debouncedUpdate()
+      } catch (error) {
+        if (error !== 'canceled') {
+          throw error
+        }
+      }
+    },
+    createEmptyResult() {
+      const result = {}
+      set(result, this.countProperty, 0)
+      set(result, this.itemsProperty, [])
+      return result
+    },
     maybeResetPage() {
       if (this.page !== 1) {
         // The watcher will trigger an update.
