@@ -173,7 +173,6 @@ export default {
         if (previous) {
           this.maybeResetPage()
         } else {
-          console.log('filter changed, update() now')
           this.update()
         }
       },
