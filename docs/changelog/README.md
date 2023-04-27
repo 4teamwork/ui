@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [serverside-iterator] Fix a bug that caused only one Serverside component to execute its internal `debouncedUpdate` method when several exist.
+
 ## [1.7.2] - 2023-04-26
 
 - [serverside-iterator] If `disableRouteSync` is set to `true`, the filter state will not be applied to the current URL path.
