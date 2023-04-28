@@ -101,6 +101,8 @@ export default {
         value: size,
         text: this.$t('serversideIterator.paginationSizeEntry', { size }),
       })),
+      internalPageSize: this.itemsPerPageDefault,
+      internalPage: 1,
     }
   },
   computed: {
@@ -110,15 +112,31 @@ export default {
     items() {
       return get(this.result, this.itemsProperty, [])
     },
-    pageSize: mapQueryParam((vm) => vm.pageSizeParam, {
+    queryPageSize: mapQueryParam((vm) => vm.pageSizeParam, {
       defaultValue: (vm) => vm.itemsPerPageDefault,
       transformer: (value) => Number.parseInt(value, 10),
       queryTransformer: (query, vm) => omit(query, [vm.pageParam]),
     }),
-    page: mapQueryParam((vm) => vm.pageParam, {
+    queryPage: mapQueryParam((vm) => vm.pageParam, {
       defaultValue: () => 1,
       transformer: (value) => Number.parseInt(value, 10),
     }),
+    pageSize: {
+      get() {
+        return this.disableRouteSync ? this.internalPageSize : this.queryPageSize
+      },
+      set(v) {
+        this.disableRouteSync ? (this.internalPageSize = v) : (this.queryPageSize = v)
+      },
+    },
+    page: {
+      get() {
+        return this.disableRouteSync ? this.internalPage : this.queryPage
+      },
+      set(v) {
+        this.disableRouteSync ? (this.internalPage = v) : (this.queryPage = v)
+      },
+    },
     pagesCount() {
       return Math.ceil(this.count / this.pageSize)
     },
