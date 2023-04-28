@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [serverside-iterator] `disableRouteSync` now also prevents URL path modification on pagination changes.
+
 ## [1.7.5] - 2023-04-27
 
 - [serverside-iterator] Remove left behind console.log
