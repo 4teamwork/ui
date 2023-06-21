@@ -7,6 +7,12 @@
     <v-spacer />
     <v-container fluid class="d-flex align-center">
       <template v-if="!loading && !disablePagination">
+        <v-icon
+          class="pagination-button pagination-icon"
+          :disabled="firstPaginationButtonDisabled"
+          @click="goToFirstPage"
+          >mdi-chevron-double-left</v-icon
+        >
         <v-pagination
           v-model="page"
           :length="pagesCount"
@@ -16,6 +22,9 @@
           class="list-pagination"
           color="primary"
         />
+        <v-icon class="pagination-button pagination-icon" :disabled="lastPaginationButtonDisabled" @click="goToLastPage"
+          >mdi-chevron-double-right</v-icon
+        >
         <span class="mx-2 grow text-no-wrap" data-testid="list-pagination-caption">{{ listPaginationCaption }}</span>
         <v-select
           v-model="pageSize"
@@ -151,6 +160,12 @@ export default {
       const to = Math.min(this.page * this.pageSize, this.count)
       return this.$t('serversideIterator.paginationCaption', { from, to, total: this.count })
     },
+    firstPaginationButtonDisabled() {
+      return this.page === 1
+    },
+    lastPaginationButtonDisabled() {
+      return this.page === this.pagesCount
+    },
   },
   watch: {
     page() {
@@ -223,6 +238,12 @@ export default {
         this.update()
       }
     },
+    goToFirstPage() {
+      this.page = 1
+    },
+    goToLastPage() {
+      this.page = this.pagesCount
+    },
   },
   i18n: {
     messages: {
@@ -241,20 +262,19 @@ export default {
 </script>
 
 <style lang="scss">
-.list-pagination {
-  .v-pagination__navigation {
-    box-shadow: none;
-    border-radius: 2px;
-    height: 22px !important;
-    width: 22px !important;
-    padding: 0 !important;
-    border: 1px solid var(--v-greydark-base);
-    margin: 0 4px 0 0;
-
-    > .v-icon {
-      font-size: 1rem;
-    }
-  }
+.pagination-button,
+.list-pagination .v-pagination__navigation {
+  box-shadow: none;
+  border-radius: 2px;
+  height: 22px !important;
+  width: 22px !important;
+  padding: 0 !important;
+  border: 1px solid var(--v-greydark-base);
+  margin: 0 4px 0 0;
+}
+.pagination-icon,
+.list-pagination .v-pagination__navigation .v-icon {
+  font-size: 1rem !important;
 }
 .pagination-select {
   .v-select__selection {
