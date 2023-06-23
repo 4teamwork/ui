@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.0] - 2023-06-23
+
 - [serverside-iterator] Add pagination buttons to navigate to the first and last page of an iterator.
 
 ## [1.7.6] - 2023-04-28
