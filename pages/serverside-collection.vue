@@ -15,7 +15,7 @@
     </v-btn-toggle>
     <ServersideCollection
       :fetch="loadData"
-      :headers="headers"
+      :headers.sync="headers"
       :filter="filter"
       :items-per-page-options="[10, 20, 30]"
       :items-per-page-default="10"
@@ -23,6 +23,7 @@
       count-property="total_jokes"
       page-size-param="limit"
       show-select
+      draggable-headers
     >
       <template #select-all-warning="{ count, items }">
         {{ `${items.length} jokes on this page are selected (total jokes: ${count}).` }}
@@ -71,15 +72,23 @@ export default {
   data() {
     return {
       filter: fromQueryString(this.$route.query, ['term', 'ordering'], { term: '', ordering: [] }),
+      tableHeaders: [
+        { text: 'Joke', value: 'joke', isTitle: true },
+        { text: 'Link', value: 'id', sortable: true },
+      ],
       tableStyle: 'table',
     }
   },
   computed: {
-    headers() {
-      return [
-        ...(this.showCustomTable ? [{ text: 'Joke', value: 'joke', isTitle: true }] : []),
-        { text: 'Link', value: 'id', sortable: true },
-      ]
+    headers: {
+      get() {
+        return this.showCustomTable ? this.tableHeaders : this.tableHeaders.filter((h) => h.value === 'id')
+      },
+      set(headers) {
+        if (this.showCustomTable) {
+          this.tableHeaders = headers
+        }
+      },
     },
     showCustomTable() {
       return this.tableStyle === 'custom-table'

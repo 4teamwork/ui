@@ -1,15 +1,16 @@
 # ftw-serverside-collection
 
-The ``ftw-serverside-collection`` component is used to display data fetched, filtered and sorted by the backend.
+The `ftw-serverside-collection` component is used to display data fetched, filtered and sorted by the backend.
 
-On small screens (``$vuetify.breakpoint.smAndDown``), the data is displayed as list items, otherwise as a customized data table.
+On small screens (`$vuetify.breakpoint.smAndDown`), the data is displayed as list items, otherwise as a customized data table.
 
 ::: warning
-This component requires ``debounce-async``. Make sure to install it in order to use this component:
+This component requires `debounce-async`. Make sure to install it in order to use this component:
 
 ```bash
 yarn add debounce-async
 ```
+
 :::
 
 Serverside Table:
@@ -20,7 +21,6 @@ Serverside Custom Table (alternative layout):
 
 Serverside Listing:
 ![Serverside Listing](./images/serverside-listing.png)
-
 
 ## Usage
 
@@ -111,8 +111,8 @@ export default {
 
 ### Filtering and sorting
 
-A filter can be defined and modified outside component. If it changes, the component fetches the data again. This works well with the component ``<ftw-text-filter-field>`` for example.
-Similarly, the ordering parameter can be part of the filter. One may use the component ``<ftw-ordering-menu>`` for this.
+A filter can be defined and modified outside component. If it changes, the component fetches the data again. This works well with the component `<ftw-text-filter-field>` for example.
+Similarly, the ordering parameter can be part of the filter. One may use the component `<ftw-ordering-menu>` for this.
 The ordering parameter is automatically updated for sortable columns for the `CustomTable` style. The ordering is thereby a list of columns being sorted. The sorting direction is identified by a `-` for descending and no prefix for ascending. This schema is heavily inspired by https://www.django-rest-framework.org/api-guide/filtering/#orderingfilter.
 
 ```vue
@@ -171,48 +171,50 @@ export default {
 
 ## Props
 
-| Name                | Type     | Default              | Description                                                                                                                                                                                      |
-|---------------------|----------|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| fetch               | Function | ``(filter) => ({})`` | A function to fetch the data, e.g. from the backend.                                                                                                                                             |
-| filter              | Object   | ``{}``               | The filter object passed to the fetch function, e.g. from the backend.                                                                                                                           |
-| loading             | Boolean  | ``false``            | Externally set the loading state of the component.                                                                                                                                               |
-| disablePagination   | Boolean  | ``false``            | Set this to ``true`` to hide the footer showing the pagination actions.                                                                                                                          |
-| itemsPerPageOptions | Array    | ``[50, 100, 200]``   | Populates the dropdown to select number of items shown at once.                                                                                                                                  |
-| itemsPerPageDefault | Number   | ``50``               | The default number of items shown at once when creating the component.                                                                                                                           |
-| countProperty       | String   | ``'count'``          | The property of the data (as returned by the ``fetch`` function) containing the total number of elements available.<br>A dotted path notation can be used, e.g. ``meta.pagination.total_count``. |
-| itemsProperty       | String   | ``'results'``        | The property of the data (as returned by the ``fetch`` function) containing the list of items.<br>A dotted path notation can be used.                                                            |
-| pageSizeParam       | String   | ``'pageSize'``       | The query parameter expected by the backend to set the number of elements returned at once.                                                                                                      |
-| pageParam           | String   | ``'page'``           | The query parameter expected by the backend used for the pagination control.                                                                                                                     |
-| tableStyle          | String   | ``'table'``          | Change the table layout. Available values are ``['table', 'custom-table']``                                                                                                                      |
-| value               | Array    | ``[]``               | Used for controlling selected rows.                                                                                                                                                              |
+| Name                | Type     | Default            | Description                                                                                                                                                                                  |
+| ------------------- | -------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| fetch               | Function | `(filter) => ({})` | A function to fetch the data, e.g. from the backend.                                                                                                                                         |
+| filter              | Object   | `{}`               | The filter object passed to the fetch function, e.g. from the backend.                                                                                                                       |
+| loading             | Boolean  | `false`            | Externally set the loading state of the component.                                                                                                                                           |
+| disablePagination   | Boolean  | `false`            | Set this to `true` to hide the footer showing the pagination actions.                                                                                                                        |
+| itemsPerPageOptions | Array    | `[50, 100, 200]`   | Populates the dropdown to select number of items shown at once.                                                                                                                              |
+| itemsPerPageDefault | Number   | `50`               | The default number of items shown at once when creating the component.                                                                                                                       |
+| countProperty       | String   | `'count'`          | The property of the data (as returned by the `fetch` function) containing the total number of elements available.<br>A dotted path notation can be used, e.g. `meta.pagination.total_count`. |
+| itemsProperty       | String   | `'results'`        | The property of the data (as returned by the `fetch` function) containing the list of items.<br>A dotted path notation can be used.                                                          |
+| pageSizeParam       | String   | `'pageSize'`       | The query parameter expected by the backend to set the number of elements returned at once.                                                                                                  |
+| pageParam           | String   | `'page'`           | The query parameter expected by the backend used for the pagination control.                                                                                                                 |
+| tableStyle          | String   | `'table'`          | Change the table layout. Available values are `['table', 'custom-table']`                                                                                                                    |
+| value               | Array    | `[]`               | Used for controlling selected rows.                                                                                                                                                          |
+| draggableHeaders    | Boolean  | `false`            | Enable rearranging headers feature.                                                                                                                                                          |
 
-The component passes all props to its child components, e.g. it passes the `headers` property to the underlying ``<v-data-table>``.
+The component passes all props to its child components, e.g. it passes the `headers` property to the underlying `<v-data-table>`.
 
 ## Events
 
 | Name           | Description                                                                                                                         |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | update:loading | Emits the loading state of the component.                                                                                           |
 | update:options | Emits the options state for the underlying v-data-table component. You can use this to change the sorting when a header is clicked. |
 | input          | Emits an array of selected items when the selection is changed.                                                                     |
 | item-selected  | Event emitted when an item is selected or deselected by emitting the item and its selection state.                                  |
 | current-items  | Emits the items provided via the items prop, every time the internal computedItems is changed.                                      |
+| update:headers | Emits headers after they have been rearranged.                                                                                      |
 
 ## Slots
 
-| Name                   | Description                                                                                          |
-|------------------------|------------------------------------------------------------------------------------------------------|
-| ``item``               | Slot to set the layout used for the listing representation displayed on small screens.               |
-| ``title``              | Slot used to render a title at the top of each table row.                                            |
-| ``select-all-warning`` | Slot used to render a warning, informing users, that not all items on every page have been selected. |
+| Name                 | Description                                                                                          |
+| -------------------- | ---------------------------------------------------------------------------------------------------- |
+| `item`               | Slot to set the layout used for the listing representation displayed on small screens.               |
+| `title`              | Slot used to render a title at the top of each table row.                                            |
+| `select-all-warning` | Slot used to render a warning, informing users, that not all items on every page have been selected. |
 
-Additionally, the component passes all slots to its child components, e.g. the slot ``item.<name>`` can be used to customize a specific column.
+Additionally, the component passes all slots to its child components, e.g. the slot `item.<name>` can be used to customize a specific column.
 
 ## Functions
 
-To access the functions a ````ref```` needs to be defined on the table (i.e. ref="tableName") and the functions are
+To access the functions a `ref` needs to be defined on the table (i.e. ref="tableName") and the functions are
 called like: this.$ref.tableName.function()
 
-| Name            | Description                                                                            |
-|-----------------|----------------------------------------------------------------------------------------|
-| ``update``      | Updates the data in the table |
+| Name     | Description                   |
+| -------- | ----------------------------- |
+| `update` | Updates the data in the table |
