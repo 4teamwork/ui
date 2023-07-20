@@ -10,6 +10,7 @@
         @toggle-select-all="toggleSelectAll({ ...$event, count })"
         @current-items="itemsChanged"
         @item-selected="itemSelectionChanged"
+        @update:headers="$emit('update:headers', $event)"
       >
         <template v-for="(index, name) in $scopedSlots" #[name]="data">
           <slot :name="name" v-bind="data"></slot>
