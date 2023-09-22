@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [serverside-iterator] If `routeReplace` is `true`, changes to the current URL path by the filter state will not create a new history entry.
+
 ## [1.9.0] - 2023-07-25
 
 - [custom-table] Headers can now be rearranged by dragging individual headers arround.

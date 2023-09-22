@@ -78,6 +78,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    routeReplace: {
+      type: Boolean,
+      default: () => false,
+    },
     itemsPerPageOptions: {
       type: Array,
       default: () => defaultItemsPerPageOptions,
@@ -178,10 +182,8 @@ export default {
   created() {
     this.debouncedUpdate = debounceAsync(async function debouncedUpdate() {
       if (!this.disableRouteSync) {
-        this.$router.push({
-          name: this.$route.name,
-          query: this.computedFilter,
-        })
+        const to = { name: this.$route.name, query: this.computedFilter }
+        this.routeReplace ? this.$router.replace(to) : this.$router.push(to)
       }
       this.$emit('update:loading', true)
       try {
