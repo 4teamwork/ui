@@ -51,6 +51,7 @@ import omit from 'lodash/omit'
 import pickBy from 'lodash/pickBy'
 import get from 'lodash/get'
 import set from 'lodash/set'
+import isEqual from 'lodash/isEqual'
 import { mapQueryParam } from '../../util/query'
 
 const defaultItemsPerPageOptions = [50, 100, 200]
@@ -181,7 +182,7 @@ export default {
   },
   created() {
     this.debouncedUpdate = debounceAsync(async function debouncedUpdate() {
-      if (!this.disableRouteSync) {
+      if (!this.disableRouteSync && !isEqual(this.currentFilter, this.computedFilter)) {
         const to = { name: this.$route.name, query: this.computedFilter }
         this.routeReplace ? this.$router.replace(to) : this.$router.push(to)
       }
@@ -198,6 +199,7 @@ export default {
         throw error
       } finally {
         this.fetchRequests = []
+        this.currentFilter = this.computedFilter
         this.$emit('update:loading', false)
       }
     }, 400)
