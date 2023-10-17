@@ -183,7 +183,7 @@ export default {
     this.debouncedUpdate = debounceAsync(async function debouncedUpdate() {
       if (!this.disableRouteSync) {
         const to = { name: this.$route.name, query: this.computedFilter }
-        this.routeReplace ? this.$router.replace(to) : this.$router.push(to)
+        this.routeReplace ? this.$router.replace(to).catch((e) => {}) : this.$router.push(to)
       }
       this.$emit('update:loading', true)
       try {
