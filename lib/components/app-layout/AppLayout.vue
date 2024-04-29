@@ -20,6 +20,9 @@
         <template v-slot:app-icon>
           <slot name="app-icon" />
         </template>
+        <template v-slot:company-logo>
+          <slot name="company-logo" />
+        </template>
       </Navigation>
     </slot>
     <slot name="toolbar-root">

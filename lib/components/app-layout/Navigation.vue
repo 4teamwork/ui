@@ -28,7 +28,9 @@
           <span class="caption bodylight--text text-no-wrap">{{ `${appName} ${version}` }}</span>
           <div class="d-flex pb-4 pt-2 align-center">
             <span class="caption bodylight--text text-no-wrap pr-1">Created by</span>
-            <CompanyLogo />
+            <slot name="company-logo">
+              <CompanyLogo />
+            </slot>
           </div>
         </div>
       </v-fade-transition>
