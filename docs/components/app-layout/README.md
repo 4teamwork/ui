@@ -149,6 +149,7 @@ export default {
 | toolbar-root    | Slot to replace the whole toolbar                                             |
 | toolbar-actions | Slot to fill in actions for the toolbar next to the user menu                 |
 | app-icon        | Slot to define an app icon in top left corner                                 |
+| company-logo    | Slot to define the company logo in the navigation's lower part                |
 | usermenu        | Slot to fill in the usermenu                                                  |
 | avatar          | Slot to replace the whole avatar                                              |
 | avatar-image    | Slot to set image of the user avatar                                          |

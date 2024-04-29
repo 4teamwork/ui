@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [app-layout] Provide a slot to override the company logo.
+
 ## [1.9.2] - 2023-10-17
 
 - [serverside-iterator] Fix an error that is thrown by VueRouter when replacing the route with no changes to the path.
