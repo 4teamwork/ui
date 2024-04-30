@@ -1,5 +1,6 @@
 {
   "name": "docs",
+  "license": "MIT",
   "scripts": {
     "dev": "vuepress dev",
     "build": "vuepress build"
