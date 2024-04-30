@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.10.0] - 2024-04-30
+
 - [app-layout] Provide a slot to override the company logo.
 
 ## [1.9.2] - 2023-10-17
