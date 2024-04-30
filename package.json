@@ -57,5 +57,9 @@
     "vue": "^2.6.12",
     "vue-i18n": "^8.25.0",
     "vuetify": "^2.4.8"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }
