@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [select-switcher] Adds a new component ftw-select-switcher to provide a combination of a switcher and a dropdown menu.
+
 ## [1.10.0] - 2024-04-30
 
 - [app-layout] Provide a slot to override the company logo.
