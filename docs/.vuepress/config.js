@@ -27,6 +27,8 @@ module.exports = {
           { title: 'DateTimeField', path: '/components/date-time-field/' },
           { title: 'SelectSwitcher', path: '/components/select-switcher/' },
           { title: 'ServersideCollection', path: '/components/serverside-data/' },
+          { title: 'SystemBar', path: '/components/system-bar/' },
+          { title: 'SystemBarAlert', path: '/components/system-bar-alert/' },
         ],
       },
     ],
