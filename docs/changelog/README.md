@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - [base-modal] Adds a new component ftw-base-modal to provide a basic modal. 
+- [color-picker] Adds a new component ftw-color-picker to provide a color picker input field.
+
 ## [1.11.0] - 2025-08-12
 
 - [select-switcher] Adds a new component ftw-select-switcher to provide a combination of a switcher and a dropdown menu.
