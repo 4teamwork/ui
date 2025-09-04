@@ -22,6 +22,7 @@ module.exports = {
           { title: 'AppLayout', path: '/components/app-layout/' },
           { title: 'AppSwitcher', path: '/components/app-switcher/' },
           { title: 'BaseModal', path: '/components/base-modal/' },
+          { title: 'ColorPicker', path: '/components/color-picker/' },
           { title: 'SelectSwitcher', path: '/components/select-switcher/' },
           { title: 'ServersideCollection', path: '/components/serverside-data/' },
         ],
