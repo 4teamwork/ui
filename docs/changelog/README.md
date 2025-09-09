@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.12.0] - 2025-09-09
+
 - [base-modal] Adds a new component ftw-base-modal to provide a basic modal. 
 - [calendar-field] Adds a new component ftw-calendar-field to provide a date input field.
 - [color-picker] Adds a new component ftw-color-picker to provide a color picker input field.
