@@ -16,7 +16,7 @@
         :label="label"
         :placeholder="placeholder"
         append-icon="mdi-calendar"
-        :rules="[...rules, $rules.date]"
+        :rules="[...rules, validationRules.date]"
         :clearable="clearable"
         :disabled="disabled"
         v-on="on"
@@ -33,9 +33,11 @@
 
 <script>
 import { DateTime } from 'luxon'
+import validationMixin from './validation-mixin'
 
 export default {
   name: 'CalendarField',
+  mixins: [validationMixin],
   inheritAttrs: false,
   props: {
     value: {

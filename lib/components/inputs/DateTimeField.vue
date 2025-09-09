@@ -22,12 +22,14 @@ import { pick } from 'lodash'
 import isEmpty from 'lodash/isEmpty'
 import { DateTime } from 'luxon'
 import CalendarField from './CalendarField.vue'
+import validationMixin from './validation-mixin'
 
 export default {
   name: 'DateTimeField',
   components: {
     CalendarField,
   },
+  mixins: [validationMixin],
   inheritAttrs: false,
   props: {
     title: {
@@ -140,15 +142,15 @@ export default {
     },
     dateRules() {
       if (!this.clearable) {
-        return [this.$rules.required]
+        return [this.validationRules.date]
       }
       return []
     },
     timeRules() {
       if (this.clearable) {
-        return [this.$rules.time]
+        return [this.validationRules.time]
       }
-      return [this.$rules.required, this.$rules.time]
+      return [this.validationRules.required, this.validationRules.time]
     },
     noDate() {
       return !this.date
