@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [calendar-field] Replaces the rules-plugin with a mixin to ensure that the rules exist in the component.
+- [date-time-field] Replaces the rules-plugin with a mixin to ensure that the rules exist in the component.
+
 ## [1.12.0] - 2025-09-09
 
 - [base-modal] Adds a new component ftw-base-modal to provide a basic modal. 
