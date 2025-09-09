@@ -23,7 +23,8 @@
   "prettier": "@4tw/prettier-config",
   "license": "MIT",
   "dependencies": {
-    "vuedraggable": "^2.24.3"
+    "vuedraggable": "^2.24.3",
+    "luxon": "^3.7.1"
   },
   "devDependencies": {
     "@4tw/eslint-config": "^0.6.0",

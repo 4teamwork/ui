@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "inputRequired": "Erforderliche Angabe",
+    "validDateRequired": "Kein gültiges Datumsformat. Nur dd.MM.yyyy ist erlaubt.",
+    "validTimeRequired": "Kein gültiges Zeitformat. Nur HH:mm ist erlaubt."
+  }
+}

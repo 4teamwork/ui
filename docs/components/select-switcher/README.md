@@ -1,4 +1,4 @@
-# ftw-app-switcher
+# ftw-select-switcher
 
 The `ftw-select-switcher` component combines a multi-switcher with a dropdown menu. It is used to select an item from a 
 long list of items. The component requires a list of items.
@@ -15,11 +15,9 @@ long list of items. The component requires a list of items.
 
 ## Example
 
-The following example defines apps, binds the currently active app and defines a fallback app.
-
 ```vue
 <template>
-  <ftw-select-switcher v-model="currentItem" :items="items">
+  <ftw-select-switcher v-model="currentItem" :items="items" />
 </template>
 <script>
 export default {

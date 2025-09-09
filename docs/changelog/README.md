@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [base-modal] Adds a new component ftw-base-modal to provide a basic modal. 
+- [calendar-field] Adds a new component ftw-calendar-field to provide a date input field.
+- [color-picker] Adds a new component ftw-color-picker to provide a color picker input field.
+- [date-time-field] Adds a new component ftw-date-time-field to provide a date time input field.
+- [system-bar] Add a new component ftw-system-bar to provide a fixed bar at the top of the screen.
+- [system-bar-alert] Adds a new component ftw-system-bar-alert to provide an alert for the system bar.
+
 ## [1.11.0] - 2025-08-12
 
 - [select-switcher] Adds a new component ftw-select-switcher to provide a combination of a switcher and a dropdown menu.

@@ -19,7 +19,7 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   css: [],
-  plugins: [],
+  plugins: ['~/lib/plugins/rules'],
   components: [
     {
       path: '~/lib/components',
@@ -42,6 +42,7 @@ module.exports = {
       fallbackLocale: 'de',
       alwaysRedirect: true,
     },
+    langDir: 'lib/locales',
   },
   build: {
     babel: {
