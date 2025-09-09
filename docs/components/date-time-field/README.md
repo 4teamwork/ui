@@ -1,12 +1,8 @@
 # ftw-color-picker
 
-The `ftw-color-picker` component is a basic color input field.
+The `ftw-date-time-field` component is an ui component that combines a date and a time picker into one.
 
 ![Date Time Field](./images/date-time-field.png)
-
-## Modal
-
-![Color Picker Modal](./images/color-picker-modal.png)
 
 ## Usage
 
