@@ -1,6 +1,6 @@
 # ftw-calendar-field
 
-The `ftw-calendar-field` component is a out of the box component for a date input field.
+The `ftw-calendar-field` component is an out-of-the-box component for a date input field.
 
 ![Calendar Field Input](./images/calendar-field.png)
 
