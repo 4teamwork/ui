@@ -2,7 +2,7 @@
 
 The `ftw-color-picker` component is a basic color input field.
 
-![Color Picker Input](./images/color-picker-input.png)
+![Date Time Field](./images/date-time-field.png)
 
 ## Modal
 
