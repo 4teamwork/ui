@@ -19,7 +19,7 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   css: [],
-  plugins: ['~/lib/plugins/rules'],
+  plugins: [],
   components: [
     {
       path: '~/lib/components',
