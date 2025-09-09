@@ -42,7 +42,6 @@ module.exports = {
       fallbackLocale: 'de',
       alwaysRedirect: true,
     },
-    langDir: 'lib/locales',
   },
   build: {
     babel: {
