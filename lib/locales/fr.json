@@ -1,7 +1,0 @@
-{
-  "rules": {
-    "inputRequired": "Indication nécessaire",
-    "validDateRequired": "Pas de format de date valide. Seul dd.MM.yyyy est autorisé.",
-    "validTimeRequired": "Pas de format d'heure valide. Seul le format HH:mm est autorisé."
-  }
-}
