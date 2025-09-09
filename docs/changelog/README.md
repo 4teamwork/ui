@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [calendar-field] Fixes errors in the translation of input validations.
+- [date-time-field] Fixes errors in the translation of input validations.
+
 ## [1.12.1] - 2025-09-09
 
 - [calendar-field] Replaces the rules-plugin with a mixin to ensure that the rules exist in the component.
