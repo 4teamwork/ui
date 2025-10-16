@@ -5,12 +5,16 @@
     dense
     :color="backgroundColor"
     :style="{ color: textColor, width: '100%' }"
+    :dismissible="dismissible"
     v-on="$listeners"
   >
     <template #prepend>
       <v-icon v-if="icon" :color="textColor" class="mr-3">mdi-{{ icon }}</v-icon>
     </template>
     <span class="body-1">{{ text }}</span>
+    <template v-if="dismissible" #close>
+      <v-icon :color="textColor" @click="$emit('input', item)">mdi-close-circle</v-icon>
+    </template>
   </v-alert>
 </template>
 
@@ -18,6 +22,10 @@
 export default {
   name: 'SystemBarAlert',
   props: {
+    dismissible: {
+      type: Boolean,
+      default: false,
+    },
     item: {
       type: Object,
       required: true,
