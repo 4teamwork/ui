@@ -106,6 +106,10 @@ export default {
       type: String,
       default: () => 'page',
     },
+    keepQueryParams: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -182,7 +186,15 @@ export default {
   created() {
     this.debouncedUpdate = debounceAsync(async function debouncedUpdate() {
       if (!this.disableRouteSync) {
-        const to = { name: this.$route.name, query: this.computedFilter }
+        const query = this.keepQueryParams.length
+          ? {
+              ...Object.fromEntries(
+                Object.entries(this.$route.query).filter(([key]) => this.keepQueryParams.includes(key)),
+              ),
+              ...this.computedFilter,
+            }
+          : this.computedFilter
+        const to = { name: this.$route.name, query }
         this.routeReplace ? this.$router.replace(to).catch((e) => {}) : this.$router.push(to)
       }
       this.$emit('update:loading', true)
