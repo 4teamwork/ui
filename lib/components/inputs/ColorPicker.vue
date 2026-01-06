@@ -1,13 +1,18 @@
 <template>
-  <BaseModal :value="show" v-bind="$attrs" :persistent="false" max-width="300" @click:outside="close">
-    <div class="d-flex justify-center">
-      <v-color-picker v-model="inputValue" v-bind="$attrs" show-swatches v-on="$listeners" />
-    </div>
+  <BaseModal :value="show" max-width="300">
+    <v-card>
+      <v-color-picker v-model="inputValue" />
+      <v-card-actions class="mt-3">
+        <v-btn color="primary" @click="acceptColor">{{ okLabel }}</v-btn>
+        <v-btn @click="cancel">{{ cancelLabel }}</v-btn>
+      </v-card-actions>
+    </v-card>
     <template #activator="props">
       <slot name="activator" v-bind="props">
-        <v-btn text v-bind="props" app @click="open">
+        <v-btn depressed v-bind="{ ...props, ...$attrs }" app @click="open">
           {{ label }}
-          <v-icon right :color="value"> mdi-square-rounded </v-icon>
+          <v-icon v-if="value" right :color="value" style="margin-bottom:1px;"> mdi-checkbox-blank </v-icon>
+          <v-icon v-else right color="black" style="margin-bottom:1px;"> mdi-close-box-outline </v-icon>
         </v-btn>
       </slot>
     </template>
@@ -31,6 +36,14 @@ export default {
       type: String,
       default: '',
     },
+    okLabel: {
+      type: String,
+      default: 'OK',
+    },
+    cancelLabel: {
+      type: String,
+      default: 'Abbrechen',
+    },
     value: {
       type: String,
       default: () => null,
@@ -38,22 +51,9 @@ export default {
   },
   data() {
     return {
-      inputValue: this.value || this.default,
+      inputValue: this.getInitialValue(),
       show: false,
     }
-  },
-  watch: {
-    before: {
-      handler(value) {
-        if (!value) {
-          this.$emit('input', this.default)
-        }
-      },
-      immediate: true,
-    },
-    value(_) {
-      this.$emit('input', this.inputValue)
-    },
   },
   methods: {
     open() {
@@ -61,6 +61,17 @@ export default {
     },
     close() {
       this.show = false
+    },
+    cancel() {
+      this.inputValue = this.getInitialValue()
+      this.close()
+    },
+    acceptColor() {
+      this.$emit('input', this.inputValue)
+      this.close()
+    },
+    getInitialValue() {
+      return this.value || this.default
     },
   },
 }

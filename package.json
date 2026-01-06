@@ -29,6 +29,7 @@
   "devDependencies": {
     "@4tw/eslint-config": "^0.6.0",
     "@4tw/prettier-config": "^1.0.3",
+    "@mdi/font": "^7.4.47",
     "@nuxt/http": "^0.6.4",
     "@nuxtjs/i18n": "^7.0.1",
     "@nuxtjs/vuetify": "^1.12.1",
@@ -47,6 +48,7 @@
     "portfinder": "^1.0.28",
     "prettier": "^2.3.2",
     "release-it": "^14.11.3",
+    "roboto-fontface": "^0.10.0",
     "vue": "^2.7.16",
     "vue-jest": "^3.0.4",
     "vuetify": "^2.7.2",

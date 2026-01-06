@@ -18,7 +18,10 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  css: [],
+  css: [
+    '@mdi/font/css/materialdesignicons.min.css',
+    'roboto-fontface/css/roboto/roboto-fontface.css',
+  ],
   plugins: [],
   components: [
     {
@@ -26,7 +29,7 @@ module.exports = {
       pathPrefix: false,
     },
   ],
-  vuetify: { theme: { options: { customProperties: true }, themes } },
+  vuetify: { defaultAssets: false, theme: { options: { customProperties: true }, themes } },
   buildModules: ['@nuxtjs/vuetify'],
   modules: ['@nuxt/http', '@nuxtjs/i18n'],
   i18n: {
